@@ -1,23 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:xii_rpl3/screens/auth/login_screen.dart';
-import 'package:xii_rpl3/screens/home_screen.dart';
-import 'package:xii_rpl3/services/auth_services.dart';
+import 'package:xii_rpl3/pages/auth/login_screen.dart';
+import 'package:xii_rpl3/pages/menu_screen.dart';
+import 'package:xii_rpl3/pages/product/product_create_screen.dart';
+import 'package:xii_rpl3/services/product_service.dart';
+import 'package:xii_rpl3/services/auth_service.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Belajar Flutter',
+      home: AuthCheck(),
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> {
+class AuthCheck extends StatefulWidget {
+  const AuthCheck({super.key});
+
+  @override
+  State<AuthCheck> createState() => _AuthCheckState();
+}
+
+class _AuthCheckState extends State<AuthCheck> {
   final AuthService _authService = AuthService();
   late Future<bool> _isLoggedIn;
-  bool isDarkMode = false;
 
   @override
   void initState() {
@@ -27,35 +41,19 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Auth App',
-      debugShowCheckedModeBanner: false,
-      theme: isDarkMode ? ThemeData.dark() : ThemeData.light(),
-      home: FutureBuilder<bool>(
-        future: _isLoggedIn,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            );
-          } else if (snapshot.hasData && snapshot.data == true) {
-            return HomeScreen(
-              isDarkMode: isDarkMode,
-              onToggleTheme: toggleTheme,
-            );
-          } else {
-            return LoginScreen(
-              onToggleTheme: toggleTheme,
-            );
-          }
-        },
-      ),
+    return FutureBuilder<bool>(
+      future: _isLoggedIn,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        } else if (snapshot.hasData && snapshot.data == true) {
+          return MenuScreen();
+        } else {
+          return LoginScreen();
+        }
+      },
     );
-  }
-
-  void toggleTheme() {
-    setState(() {
-      isDarkMode = !isDarkMode;
-    });
   }
 }

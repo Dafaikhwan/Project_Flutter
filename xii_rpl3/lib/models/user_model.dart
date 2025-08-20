@@ -1,13 +1,10 @@
-// lib/models/user_model.dart
-
-class UserModel {
+ class UserModel {
   final String name;
   final String email;
-
+  
   UserModel({
     required this.name,
-    required this.email,
-  });
+    required this.email});
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
@@ -15,4 +12,4 @@ class UserModel {
       email: json['email'],
     );
   }
-}
+ }

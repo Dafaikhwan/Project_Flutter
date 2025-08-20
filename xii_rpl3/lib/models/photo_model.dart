@@ -18,8 +18,8 @@ class PhotoModel {
       albumId: json['albumId'],
       id: json['id'],
       title: json['title'],
-      url: 'https://picsum.photos/id/${json['id']}/600/400', // ganti ke picsum
-      thumbnailUrl: 'https://picsum.photos/id/${json['id']}/150/150', // ganti ke picsum
+      url: json['url'],
+      thumbnailUrl: json['thumbnailUrl'],
     );
   }
 }
