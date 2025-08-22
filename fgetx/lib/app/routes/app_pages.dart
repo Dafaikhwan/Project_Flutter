@@ -8,6 +8,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/pemesanan_makanan/bindings/pemesanan_makanan_binding.dart';
 import '../modules/pemesanan_makanan/views/pemesanan_makanan_view.dart';
+import '../modules/post/bindings/post_binding.dart';
+import '../modules/post/views/post_view.dart';
 
 part 'app_routes.dart';
 
@@ -41,8 +43,13 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PEMESANAN_MAKANAN,
-      page: () =>  PemesananMakananView(),
+      page: () => PemesananMakananView(),
       binding: PemesananMakananBinding(),
+    ),
+    GetPage(
+      name: _Paths.POST,
+      page: () =>  PostView(),
+      binding: PostBinding(),
     ),
   ];
 }

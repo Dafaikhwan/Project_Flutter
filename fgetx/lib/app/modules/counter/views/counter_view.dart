@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../controllers/counter_controller.dart';
 
 class CounterView extends StatelessWidget {
@@ -10,43 +11,92 @@ class CounterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Counter View")),
+      backgroundColor: const Color(0xFFF5F9FF), // sama dengan PostView & PostDetailView
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.teal,
+        title: Text(
+          '🔢 Counter',
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.w600,
+            fontSize: 20,
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: Center(
-        child: Obx(() {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Angka
-              Text(
-                "${c.count.value}",
-                style: TextStyle(
-                  fontSize: 30 + c.count.value.toDouble(),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 40),
-              // Tombol bundar + dan -
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+        child: Card(
+          elevation: 8,
+          shadowColor: Colors.teal.withOpacity(0.25),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Obx(
+              () => Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  FloatingActionButton.small(
-                    heroTag: "minus",
-                    backgroundColor: Colors.red,
-                    onPressed: () => c.decrement(),
-                    child: const Icon(Icons.remove, color: Colors.white),
+                  Text(
+                    "Angka Saat Ini",
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      color: Colors.teal.shade800,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                  const SizedBox(width: 30),
-                  FloatingActionButton.small(
-                    heroTag: "plus",
-                    backgroundColor: Colors.green,
-                    onPressed: () => c.increment(),
-                    child: const Icon(Icons.add, color: Colors.white),
+                  const SizedBox(height: 10),
+                  Text(
+                    "${c.count}",
+                    style: GoogleFonts.poppins(
+                      fontSize: 48,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.teal.shade900,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () => c.increment(),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.teal,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 12,
+                          ),
+                        ),
+                        child: const Icon(Icons.add),
+                      ),
+                      const SizedBox(width: 16),
+                      ElevatedButton(
+                        onPressed: () => c.decrement(),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.redAccent,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 12,
+                          ),
+                        ),
+                        child: const Icon(Icons.remove),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          );
-        }),
+            ),
+          ),
+        ),
       ),
     );
   }
