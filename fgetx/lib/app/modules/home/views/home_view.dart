@@ -187,6 +187,16 @@ class HomeView extends GetView<HomeController> {
                           arguments: {"heroTag": "postIcon"}),
                     ),
                   ),
+                  _fadeSlide(
+                    delay: 8,
+                    child: _menuButton(
+                      icon: Icons.album,
+                      title: "Album",
+                      heroTag: "albumIcon",
+                      onTap: () => Get.toNamed('/album',
+                          arguments: {"heroTag": "albumIcon"}),
+                    ),
+                  ),
                 ],
               ),
             ),

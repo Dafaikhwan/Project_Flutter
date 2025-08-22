@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/album/bindings/album_binding.dart';
+import '../modules/album/views/album_view.dart';
 import '../modules/counter/bindings/counter_binding.dart';
 import '../modules/counter/views/counter_view.dart';
 import '../modules/formulir/bindings/formulir_binding.dart';
@@ -48,8 +50,13 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.POST,
-      page: () =>  PostView(),
+      page: () => PostView(),
       binding: PostBinding(),
+    ),
+    GetPage(
+      name: _Paths.ALBUM,
+      page: () =>  AlbumView(),
+      binding: AlbumBinding(),
     ),
   ];
 }
